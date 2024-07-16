@@ -1,0 +1,291 @@
+:root {
+  --cir-icons: #fefefe;
+  --cir-text: #fefefe;
+  --cir-bg-dark: #242424;
+  --cir-bg-light: #3b3b3b;
+  --cir-accent: #ff7600;
+}
+
+/* Nav */
+header {
+  display: flex;
+  align-items: center;
+  margin: 2em 0;
+}
+
+.nav {
+  /* outline: 2px solid red; */
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav--link {
+  color: var(--cir-text);
+  text-transform: capitalize;
+  text-decoration: none;
+  font-size: 0.9rem;
+  align-self: center;
+}
+
+.nav--link:hover,
+.nav--link:focus {
+  color: var(--cir-accent);
+}
+
+.btn-mobile-nav {
+  border: none;
+  background: none;
+  cursor: pointer;
+
+  display: none;
+}
+
+.icon-mobile-nav {
+  height: 4.8rem;
+  width: 4.8rem;
+  color: #fefefe;
+}
+
+/* Image */
+
+img {
+  max-width: 100%;
+}
+
+.secondary-img {
+  max-width: 49%;
+}
+
+.secondary-imgs {
+  display: flex;
+  gap: 0.5em;
+}
+
+/* Button */
+.btn {
+  cursor: pointer;
+  border: 0;
+  background: transparent;
+  color: var(--cir-text);
+  font-size: 1.25rem;
+  padding: 0.5em;
+  display: inline-block;
+  position: relative;
+  align-self: start;
+  justify-self: start;
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  background-color: var(--cir-accent);
+  height: 0.85em;
+  width: 75%;
+  left: 0;
+  z-index: -1;
+  top: 50%;
+  transform-origin: bottom left;
+  transition: transform 175ms cubic-bezier(0.91, 0, 0.55, 1.64);
+}
+
+.btn:hover::after,
+.btn:focus::after {
+  transform: scale(1.35, 1.85);
+}
+
+/* Typography */
+
+.title {
+  color: var(--cir-accent);
+  text-transform: uppercase;
+  margin: 0;
+  font-size: clamp(3rem, 10vw, 7rem);
+  line-height: 1;
+}
+
+.location {
+  color: var(--cir-icons);
+  margin: 0;
+  font-size: 1.3rem;
+  margin-bottom: 1.5em;
+}
+
+/* Footer */
+footer {
+  margin-top: 2em;
+}
+
+.social-links {
+  display: flex;
+  gap: 1em;
+}
+
+.social-link:hover,
+.social-link:focus {
+  opacity: 0.5;
+}
+
+.social-img {
+  width: 2em;
+}
+
+/* ================================== */
+/* MEDIA QUERIES */
+/* ======= */
+
+@media (min-width: 800px) {
+  body {
+    margin: 0;
+  }
+
+  .secondary-img {
+    width: 70%;
+  }
+
+  .main-grid {
+    display: grid;
+    grid-template-columns:
+      minmax(1em, 1fr)
+      repeat(3, minmax(10rem, 30rem))
+      minmax(1em, 1fr);
+    gap: 2em;
+    position: relative;
+  }
+
+  header {
+    grid-column: 2 / 5;
+    display: grid;
+    grid-template-columns: subgrid;
+  }
+
+  nav {
+    grid-column: 2 / 5;
+  }
+
+  main {
+    grid-column: 2 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-template-rows: min-content;
+    grid-auto-flow: dense;
+  }
+
+  main::after {
+    content: "";
+    position: absolute;
+    background-color: var(--cir-bg-light);
+    top: 0;
+    bottom: 0;
+    left: -2em;
+    right: -2em;
+    grid-column: 3 / 5;
+    z-index: -10;
+  }
+
+  .title {
+    grid-column: 1 / 3;
+    grid-row: 1;
+  }
+
+  .location,
+  .description {
+    grid-column: 1 / 2;
+  }
+
+  .primary-img {
+    grid-column: 2 / -1;
+    grid-row: 1 / span 4;
+    z-index: -1;
+    height: 100%;
+    max-height: 500px;
+    width: min(100%, 1000px);
+    object-fit: cover;
+  }
+
+  .secondary-imgs {
+    grid-column: 2 / 3;
+    margin-top: 4em;
+  }
+
+  .social-links {
+    gap: 1em;
+  }
+
+  .social-img {
+    width: 2em;
+  }
+
+  footer {
+    grid-column: 2 / 3;
+  }
+}
+
+@media (min-width: 345px) {
+  .btn-mobile-nav {
+    display: block;
+    z-index: 9999;
+  }
+
+  .main-nav {
+    background-color: rgba(255, 255, 255, 0.9);
+    /* Backdrop filter for blur effect and glassmorphism */
+    backdrop-filter: blur(5px);
+
+    /* Need prefix for this to work on Safari browser; */
+    -webkit-backdrop-filter: blur(10px);
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    transform: translateX(100%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease-in;
+
+    /* Default: Hide Navigation */
+    /* ... */
+    /* Allows NO transition */
+    /* display: none; */
+
+    /* Steps to hide the Mobile Navigation */
+    /* 1) Hide it visually */
+    opacity: 0;
+
+    /* 2) Make it unaccessible to mouse and keyboard */
+    pointer-events: none;
+
+    /* 3) Hide it from screen readers */
+    visibility: none;
+  }
+
+  .nav-open .main-nav {
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+    transform: translateX(0);
+  }
+
+  .nav-open .icon-mobile-nav[name="close-outline"] {
+    display: block;
+  }
+
+  .nav-open .icon-mobile-nav[name="menu-outline"] {
+    display: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  main::after {
+    grid-column: 3 / 4;
+  }
+
+  .nav,
+  .secondary-imgs {
+    grid-column: 2 / 3;
+  }
+}

@@ -1,0 +1,13 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 1em;
+  background-color: var(--cir-bg-dark);
+  color: var(--cir-text);
+  line-height: 1.5;
+  font-family: sans-serif;
+}
